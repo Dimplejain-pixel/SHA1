@@ -1,0 +1,105 @@
+
+# ============================================================
+# HealthCopilot AI - Git Ignore
+# ============================================================
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+backend/.env
+frontend/.env
+kaggle.json
+*.pem
+*.key
+*.secret
+*.credential
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-shm
+*.db-wal
+
+# Keep trained ML models required by the application
+!trained_models/
+!trained_models/**
+!*.pkl
+
+# Datasets
+datasets/
+
+# Testing and coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+nosetests.xml
+
+# Node and frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+.vite/
+.turbo/
+.cache/
+
+# IDE and editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+.history/
+
+# Operating system
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Uploads and generated files
+uploads/
+backend/uploads/
+*.log
+logs/
+temp/
+tmp/
+*.tmp
+*.bak
+*.backup
+
+# Build artifacts
+build/
+*.egg-info/
+.eggs/
+.git-old/
