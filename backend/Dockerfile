@@ -20,10 +20,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install CPU-only PyTorch
 COPY backend/requirements.txt /tmp/requirements.txt
 
-RUN pip install --no-cache-dir \
+RUN pip install --no-cache-dir --timeout=300 --retries=10 \
     "torch>=2.2.0" \
     --extra-index-url https://download.pytorch.org/whl/cpu
-
+    
 # Install remaining Python dependencies
 RUN sed '/^[[:space:]]*torch[<=>~!]/d' /tmp/requirements.txt \
     > /tmp/requirements-no-torch.txt \
