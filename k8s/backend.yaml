@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sha1-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sha1-backend
+  template:
+    metadata:
+      labels:
+        app: sha1-backend
+    spec:
+      containers:
+        - name: backend
+          image: sha1-backend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: sha1-backend-env
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sha1-backend
+spec:
+  selector:
+    app: sha1-backend
+  ports:
+    - port: 8000
+      targetPort: 8000
+  type: ClusterIP
+
+

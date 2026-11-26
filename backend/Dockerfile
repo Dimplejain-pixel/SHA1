@@ -1,4 +1,3 @@
-
 FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -17,16 +16,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxrender1 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install CPU-only PyTorch
+# Copy requirements
 COPY backend/requirements.txt /tmp/requirements.txt
 
+# Install matching CPU-only PyTorch packages
 RUN pip install --no-cache-dir --timeout=300 --retries=10 \
-    "torch>=2.2.0" \
-    --extra-index-url https://download.pytorch.org/whl/cpu
-    
+    torch==2.14.1 torchvision==0.29.1 \
+    --index-url https://download.pytorch.org/whl/cpu
+
 # Install remaining Python dependencies
-RUN sed '/^[[:space:]]*torch[<=>~!]/d' /tmp/requirements.txt \
-    > /tmp/requirements-no-torch.txt \
+RUN sed -e '/^[[:space:]]*torch[<=>~!]/d' \
+        -e '/^[[:space:]]*torchvision[<=>~!]/d' \
+        /tmp/requirements.txt > /tmp/requirements-no-torch.txt \
     && pip install --no-cache-dir -r /tmp/requirements-no-torch.txt
 
 # Copy backend application

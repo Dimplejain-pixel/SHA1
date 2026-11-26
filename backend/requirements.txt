@@ -17,7 +17,8 @@ pandas>=2.2.1
 numpy>=1.26.4
 
 # Deep Learning (PyTorch CPU)
-torch>=2.2.0 --index-url https://download.pytorch.org/whl/cpu
+torch==2.14.1
+torchvision==0.29.1
 
 # NLP
 nltk>=3.8.1

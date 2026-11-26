@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sha1-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sha1-frontend
+  template:
+    metadata:
+      labels:
+        app: sha1-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: sha1-frontend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sha1-frontend
+spec:
+  selector:
+    app: sha1-frontend
+  ports:
+    - port: 80
+      targetPort: 80
+  type: ClusterIP
